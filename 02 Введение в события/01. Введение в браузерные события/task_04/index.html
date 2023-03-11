@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        #field {
+            width: 200px;
+            height: 150px;
+            border: 10px solid black;
+            background-color: #00FF00;
+            overflow: hidden;
+
+            position: relative;
+            cursor: default;
+        }
+
+        #ball {
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+
+<body style="height:2000px">
+
+    Нажмите на поле для перемещения мяча.
+    <br> Мяч не должен выходить за границы поля.
+
+
+    <div id="field">
+        <img src="https://ru.js.cx/clipart/ball.svg" width="40" height="40" id="ball"> . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    </div>
+
+    <script>
+
+
+        field.addEventListener('click', function (event) {
+            const thisRect = this.getBoundingClientRect();
+            const iBox = {
+                top: thisRect.top + this.clientTop,
+                left: thisRect.left + this.clientLeft
+            }
+
+            iBox.bottom = iBox.top + this.clientHeight;
+            iBox.right = iBox.left + this.clientWidth;
+
+            iBox.leftInternalLimit = ball.offsetWidth / 2;
+            iBox.topInternalLimit = ball.offsetHeight / 2;
+            iBox.rightInternalLimit = this.clientWidth - ball.offsetWidth / 2;
+            iBox.bottomInternalLimit = this.clientHeight - ball.offsetHeight / 2;
+
+            let x = event.clientX - iBox.left;
+            let y = event.clientY - iBox.top;
+
+            x = Math.min(Math.max(x, iBox.leftInternalLimit), iBox.rightInternalLimit);
+            y = Math.min(Math.max(y, iBox.topInternalLimit), iBox.bottomInternalLimit);
+
+            x -= ball.offsetWidth / 2;
+            y -= ball.offsetHeight / 2;
+
+            ball.style.left = x + 'px';
+            ball.style.top = y + 'px';
+
+
+        });
+    </script>
+
+
+</body>
+
+</html>

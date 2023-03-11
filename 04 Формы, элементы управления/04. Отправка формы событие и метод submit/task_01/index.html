@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Кликнете на кнопку</h1>
+    <button id="button">Жмите...</button>
+
+    <div id="prompt-form-container">
+        <form id="prompt-form">
+            <div id="prompt-message">Введите что-нибудь...
+                <br>Пожалуйста..
+            </div>
+            <input name="text" type="text">
+            <input type="submit" value="Ok">
+            <input type="button" name="cancel" value="Отмена">
+        </form>
+    </div>
+
+    <script>
+        'use strict';
+
+        const promptFormContainer = document.querySelector('#prompt-form-container');
+        const promptForm = document.querySelector('#prompt-form');
+        const promptMessage = document.querySelector('#prompt-message');
+
+        let callbackFunc;
+
+        promptFormContainer.hidden = true;
+
+        button.addEventListener('click', showForm);
+
+        const formElems = Array.from(promptForm.elements).filter(elem => elem.type !== 'hidden');
+
+        const firstTabElem = formElems[0];
+        const lastTabElem = formElems[formElems.length - 1];
+
+        promptForm.addEventListener('submit', event => {
+            event.preventDefault();
+            acceptInput();
+        });
+
+        promptForm.elements.cancel.addEventListener('click', cancelInput);
+
+        firstTabElem.addEventListener('keydown', event => {
+            if (event.key == 'Tab' && event.shiftKey) {
+                event.preventDefault();
+                lastTabElem.focus();
+            }
+        });
+
+        lastTabElem.addEventListener('keydown', event => {
+            if (event.key == 'Tab' && !event.shiftKey) {
+                event.preventDefault();
+                firstTabElem.focus();
+            }
+        });
+
+
+
+
+        function cancelInput() {
+            hideForm();
+            setTimeout(() => callbackFunc(null));
+        }
+
+        function acceptInput() {
+            if (promptForm.elements.text.value === '') {
+                return;
+            }
+
+            hideForm();
+            setTimeout(() => callbackFunc(promptForm.elements.text.value));
+        }
+
+        function formShowing() {
+            return !promptFormContainer.hidden;
+        }
+
+        function cancelByEsc(event) {
+            if (event.key === 'Escape') {
+                cancelInput();
+            }
+        }
+
+        function showForm() {
+            promptFormContainer.hidden = false;
+
+            document.addEventListener('keydown', cancelByEsc);
+        }
+
+        function hideForm() {
+            promptFormContainer.hidden = true;
+
+            document.removeEventListener('keydown', cancelByEsc);
+        }
+
+        button.onclick = () => {
+            showPrompt("Введите что-нибудь<br>...умное :)", function (value) {
+                alert(value);
+            });
+        };
+
+
+
+        function showPrompt(html, callback) {
+            callbackFunc = callback;
+            promptMessage.innerHTML = html;
+            showForm();
+        }
+    </script>
+</body>
+
+</html>

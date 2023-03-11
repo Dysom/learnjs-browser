@@ -1,0 +1,18 @@
+
+В ЧЁМ ОТЛИЧИЕ CSS-СВОЙСТВ WIDTH И CLIENTWIDTH
+
+В чём отличие между getComputedStyle(elem).width и elem.clientWidth?
+
+Укажите хотя бы 3 отличия, лучше – больше.
+
+
+
+ОТВЕТ:
+
+getComputedStyle не учитывает свойства box-sizing
+
+getComputedStyle работает по разному в разных браузерах
+
+getComputedStyle может выдать значение auto, а clientWidth всегда количественная величина
+
+getComputedStyle как правило выдает строку с величиной и 'px', clientWidth всегда числовое значение

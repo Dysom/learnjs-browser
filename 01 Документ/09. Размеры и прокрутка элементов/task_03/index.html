@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <style>
+        #field {
+            width: 200px;
+            border: 10px groove black;
+            background-color: #00FF00;
+            position: relative;
+        }
+
+        #ball {
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id="field">
+        <img src="https://en.js.cx/clipart/ball.svg" width="40" height="40" id="ball"> . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . .
+    </div>
+
+    <script>
+        const coords = posElemToCenterParent(ball, field);
+
+        ball.style.left = coords.left + 'px';
+        ball.style.top = coords.top + 'px';
+
+        function posElemToCenterParent(elem, parentElem) {
+
+            return {
+                left: (parentElem.clientWidth - elem.offsetWidth) / 2,
+                top: (parentElem.clientHeight - elem.offsetHeight) / 2
+            }
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+<style>
+    .hh {
+        color: red;
+    }
+
+    .mm {
+        color: green;
+    }
+
+    .ss {
+        color: blue;
+    }
+</style>
+
+<body>
+
+    <div id="watch">
+        <span class="hh">hh</span>:<span class="mm">mm</span>:<span class="ss">ss</span>
+    </div>
+
+    <!-- клик по этой кнопке вызовет clockStart() -->
+    <input type="button" onclick="clockStart()" value="Старт">
+
+    <!-- клик по этой кнопке вызовет clockStop() -->
+    <input type="button" onclick="clockStop()" value="Стоп">
+
+    <script>
+        let timer;
+        const hh = document.querySelector('#watch .hh');
+        const mm = document.querySelector('#watch .mm');
+        const ss = document.querySelector('#watch .ss');
+
+        function clockStart() {
+            timer = setInterval(showTime, 1000);
+            showTime();
+        }
+
+        function clockStop() {
+            if (timer) clearInterval(timer);
+        }
+
+        function showTime() {
+            let now = new Date();
+            hh.textContent = now.getHours().toString().padStart(2, '0');
+            mm.textContent = now.getMinutes().toString().padStart(2, '0');
+            ss.textContent = now.getSeconds().toString().padStart(2, '0');
+        }
+    </script>
+
+</body>
+
+</html>

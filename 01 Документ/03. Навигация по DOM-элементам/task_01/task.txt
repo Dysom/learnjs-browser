@@ -1,0 +1,32 @@
+
+ДОЧЕРНИЕ ЭЛЕМЕНТЫ В DOM
+
+Для страницы:
+
+<html>
+<body>
+  <div>Пользователи:</div>
+  <ul>
+    <li>Джон</li>
+    <li>Пит</li>
+  </ul>
+</body>
+</html>
+Напишите код, как получить…
+
+элемент <div>?
+<ul>?
+второй <li> (с именем Пит)?
+
+
+
+ОТВЕТ:
+
+// получить <div>
+document.body.firstElementChild 
+
+// получить <ul>
+document.body.children[1] 
+
+// получить <li> (с именем Пит)
+document.body.children[1].children[1]

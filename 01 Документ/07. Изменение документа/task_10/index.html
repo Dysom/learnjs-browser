@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <table id="table">
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Возраст</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John</td>
+                <td>Smith</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>Pete</td>
+                <td>Brown</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td>Ann</td>
+                <td>Lee</td>
+                <td>5</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        const tbody = document.querySelector('#table tbody');
+
+        let rowsArr = Array.from(tbody.children);
+
+        rowsArr.sort(
+            (rowA, rowB) => {
+                return rowA.firstElementChild.textContent < rowB.firstElementChild.textContent ? -1 : 1;
+            }
+        )
+
+        tbody.append(...rowsArr);
+    </script>
+
+</body>
+
+</html>

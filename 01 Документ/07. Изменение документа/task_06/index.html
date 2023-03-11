@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+
+<body>
+
+    <ul>
+        <li>Животные
+            <ul>
+                <li>Млекопитающие
+                    <ul>
+                        <li>Коровы</li>
+                        <li>Ослы</li>
+                        <li>Собаки</li>
+                        <li>Тигры</li>
+                    </ul>
+                </li>
+                <li>Другие
+                    <ul>
+                        <li>Змеи</li>
+                        <li>Птицы</li>
+                        <li>Ящерицы</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>Рыбы
+            <ul>
+                <li>Аквариумные
+                    <ul>
+                        <li>Гуппи</li>
+                        <li>Скалярии</li>
+                    </ul>
+                </li>
+                <li>Морские
+                    <ul>
+                        <li>Морская форель</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <script>
+        processTree(document.querySelector('body > ul'));
+
+        function processTree(ul, pad = 0) {
+            let cnt = 0;
+
+            for (let li of ul.children) {
+                cnt++;
+
+                let subUl = li.querySelector('ul');
+                if (subUl) {
+                    let liCnt = processTree(subUl, pad + 1);
+                    if (liCnt) {
+                        li.firstChild.data += ' [' + liCnt + ']';
+                    }
+
+                    cnt += liCnt;
+                }
+            };
+
+            return cnt;
+        }
+    </script>
+
+</body>
+
+</html>

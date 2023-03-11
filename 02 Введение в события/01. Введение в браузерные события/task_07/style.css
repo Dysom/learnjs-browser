@@ -1,0 +1,73 @@
+.arrow {
+    padding: 0;
+    background: #ddd;
+    border-radius: 15px;
+    border: 1px solid gray;
+    font-size: 24px;
+    line-height: 0.8em;
+    color: #444;
+    display: block;
+}
+
+#ribbon>.arrow {
+    position: absolute;
+    display: flex;
+    align-items: top;
+    min-height: 1em;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#ribbon>.arrow_left {
+    left: 10px;
+}
+
+#ribbon>.arrow_right {
+    right: 10px;
+}
+
+.arrow:focus {
+    outline: none;
+}
+
+.arrow:hover {
+    background: #ccc;
+    cursor: pointer;
+}
+
+ul {
+    height: 130px;
+    /* width: max-content; */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0;
+    display: flex;
+}
+
+ul img {
+    width: 130px;
+    height: 130px;
+    display: block;
+    /* убираем пустое место вокруг картинок */
+}
+
+#ribbon {
+    box-sizing: content-box;
+    position: relative;
+    width: 390px;
+    padding: 10px 40px;
+    border: 1px solid #CCC;
+    border-radius: 15px;
+    background: #eee;
+}
+
+#box {
+    overflow: hidden;
+}
+
+#box>ul {
+    position: relative;
+    left: 0;
+    transition: all 1s ease;
+}

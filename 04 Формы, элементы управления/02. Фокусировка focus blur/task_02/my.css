@@ -1,0 +1,25 @@
+.edit {
+    box-sizing: border-box;
+    resize: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: block;
+    overflow: hidden;
+
+    background-color: aqua;
+}
+
+#bagua-table td {
+    position: relative;
+}
+
+.buttons-holder {
+    position: absolute;
+    left: 0;
+    top: 100%;
+}
+
+td.td-edit {
+    padding: 0;
+}

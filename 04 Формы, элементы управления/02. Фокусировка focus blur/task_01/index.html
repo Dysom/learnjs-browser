@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <link type="text/css" rel="stylesheet" href="my.css">
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+    <ul>
+        <li>Кликните на div ниже, чтобы отредактировать текст.</li>
+        <li>Нажатие на Enter или потеря фокуса с ввода сохранят содержимое.</li>
+    </ul>
+
+    HTML-код разрешён.
+
+    <div id="view" class="view">Текст</div>
+
+    <script>
+        const textarea = document.createElement('textarea');
+        textarea.className = 'edit';
+        textarea.style.display = 'none';
+        view.after(textarea);
+
+        view.addEventListener('click', () => {
+            textarea.value = view.innerHTML;
+            view.style.display = 'none';
+            textarea.style.display = '';
+            textarea.focus();
+        });
+
+        function textareaLeave() {
+            view.innerHTML = textarea.value;
+            textarea.style.display = 'none';
+            view.style.display = '';
+        }
+
+        textarea.addEventListener('blur', textareaLeave);
+
+        textarea.addEventListener('keydown',
+            (event) => {
+                if (event.key === 'Enter')
+                    textareaLeave();
+            }
+        );
+    </script>
+
+</body>
+
+</html>

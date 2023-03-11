@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 4px;
+        }
+
+        th {
+            cursor: pointer;
+        }
+
+        th:hover {
+            background: yellow;
+        }
+    </style>
+</head>
+
+<body>
+
+    <table id="grid">
+        <thead>
+            <tr>
+                <th data-type="number">Возраст</th>
+                <th data-type="string">Имя</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>5</td>
+                <td>Вася</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Петя</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>Женя</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Маша</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Илья</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        grid.addEventListener('click', (event) => {
+            const sortType = event.target.dataset.type;
+
+            if (sortType) {
+                const th = event.target;
+                const ths = th.parentElement.children;
+
+                let columnNum;
+
+                for (let i = 0; i < ths.length; i++) {
+                    if (ths[i] === th) {
+                        columnNum = i;
+                        break;
+                    }
+                }
+
+                const tbody = grid.children[1];
+
+                const rows = Array.from(tbody.children);
+
+                if (sortType === 'number') {
+                    rows.sort((rowA, rowB) => {
+                        return rowA.children[columnNum].textContent - rowB.children[columnNum].textContent;
+                    });
+                }
+
+                if (sortType === 'string') {
+                    rows.sort((rowA, rowB) => {
+                        return rowA.children[columnNum].textContent < rowB.children[columnNum].textContent ? -1 : 1;
+                    });
+                }
+
+                rows.forEach(row => tbody.append(row));
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td,
+        th {
+            border: 1px solid black;
+            padding: 3px;
+            text-align: center;
+        }
+
+        th {
+            font-weight: bold;
+            background-color: #E6E6E6;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id="calendar"></div>
+
+    <script>
+        function createCalendar(elem, year, month) {
+            const daysInMonth = new Date(year, month, 0).getDate();
+            const numOfFirstDay = (new Date(year, month - 1, 1).getDay() + 6) % 7;
+
+            let str = '<table>';
+            str += '<tr><th>пн</th><th>вт</th><th>ср</th><th>чт</th><th>пт</th><th>сб</th><th>вс</th></tr>';
+            str += '<tr>';
+            str += '<td></td>'.repeat(numOfFirstDay);
+
+            let currWeekDay = numOfFirstDay;
+
+            for (let d = 1; d <= daysInMonth; d++) {
+                if (d > 1 && currWeekDay == 0) {
+                    str += '<tr>';
+                }
+
+                str += '<td>' + d + '</td>';
+                if (currWeekDay === 6) {
+                    str += '</tr>';
+                }
+
+                currWeekDay++;
+                currWeekDay %= 7;
+            }
+
+            if (currWeekDay > 0) {
+                str += '<td></td>'.repeat(7 - currWeekDay);
+                str += '</tr>';
+            }
+
+            str += '</table>';
+
+            elem.insertAdjacentHTML('beforeend', str);
+        }
+
+        createCalendar(calendar, 2012, 9);
+    </script>
+
+</body>
+
+</html>
